@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//GroupMe Calendar Sync//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:GroupMe Events
+X-WR-TIMEZONE:UTC
+X-WR-CALDESC:Synced GroupMe Calendar Events
+BEGIN:VEVENT
+UID:groupme-46f3ee210a284f6a8f12e3d5c76f41c4@groupme.com
+DTSTAMP:20261101T185616Z
+DTSTART;VALUE=DATE:20261106
+DTEND;VALUE=DATE:20261109
+SUMMARY:[Beginner (& More) Hiking/ Adventure Group - SLC] Moab Camping + Hiking Weekend
+DESCRIPTION:Let’s make some memories somewhere between the red dirt and the endless blue sky.\n\nI’m planning two nights of camping in Moab\, heading down Friday\, November 6 and coming home Sunday\, November 8.\n\nThe plan is simple: campfires 🔥\, good company\, and plenty of red rock sauntering. I’d love to catch sunrise and sunset at different arches\, and build out some great hiking routes together depending on what everyone feels up for.\n\nCamp location TBD once we have a better idea of group size.\n\nBring your camping gear\, hiking shoes\, warm layers\, food and drinks .. and most importantly\, bring your sense of adventure and awe.\n\nGroup: Beginner (& More) Hiking/ Adventure Group - SLC\nImage: https://i.groupme.com/1800x1200.jpeg.bdfa405d7e8a493a964c2a9eb3549452
+LOCATION:Arches National Park\, Moab\, UT\, 84532
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:groupme-fbf9a59bcff647418e6dff2ef90fceb3@groupme.com
+DTSTAMP:20261101T185616Z
+DTSTART:20261114T160000Z
+DTEND:20261114T230000Z
+SUMMARY:[Beginner (& More) Hiking/ Adventure Group - SLC] Hard Hike: Frary Peak and Dooly Knob Trail
+DESCRIPTION:Hard Hike: Frary Peak and Dooly Knob Trail\n\nLength: 7.9 miles \nElevation Gain: ~2\,400 ft\n\nLet’s hike to Frary Peak\, the tallest point on Antelope Island! We will also take a small detour to Dooly Knob\, a small peak along the way. \n\nThe lower elevation and lack of shade make this a great hike to do during the colder months and the bugs that the island is usually notorious for die off by this time of year. Antelope Island has such a unique landscape and the bison are very cool to witness\, so this is one of my favorite trails. My favorite part is the scramble just before the summit\, but it can be easily bypassed. \n\nIt will be chilly and windy\, so please come prepared with a jacket\, beanie\, gloves\, etc. Please also be prepared with plenty of water and snacks/food. \n\nThe trailhead is about an hour drive from SLC and there is a fee required to enter Antelope Island State Park\, so we can coordinate carpooling the week of the hike. There is a required $15 day-use fee per vehicle. \n\nPlease let me know if you have any questions!\n\nAllTrails Link:\nhttps://www.alltrails.com/explore/custom-routes/custom-route-72a2bd8\n\nGroup: Beginner (& More) Hiking/ Adventure Group - SLC\nImage: https://i.groupme.com/2695x2477.jpeg.fbb7966607f3416da300873df1f52ffe
+LOCATION:Frary Peak Trailhead\, 40.99394\, -112.20258
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
