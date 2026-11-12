@@ -9,6 +9,9 @@ import re
 
 HIKING_GROUP_ID = "114352942"
 FEED_BASE_URL = "https://half-fast-code.github.io/groupme-calendar-feed"
+# Optional: once you run apps-script/Code.gs and make the calendar public,
+# paste its Calendar ID here so Google Calendar subscribers get ~hourly updates.
+GOOGLE_CALENDAR_CID = ""
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
     try:
@@ -252,7 +255,8 @@ def generate_hiking_feed(all_events, member_map, now_utc):
         f.write(ics_content)
 
     feed_url = f"{FEED_BASE_URL}/hiking.ics"
-    gcal_url = f"https://calendar.google.com/calendar/render?cid={feed_url}"
+    gcal_cid = GOOGLE_CALENDAR_CID.strip() or feed_url
+    gcal_url = f"https://calendar.google.com/calendar/render?cid={gcal_cid}"
     webcal_url = feed_url.replace("https://", "webcal://")
     cards_section = "\n".join(cards_html) if cards_html else '<p class="empty">No upcoming events scheduled right now — check back soon!</p>'
 
@@ -332,6 +336,26 @@ def generate_hiking_feed(all_events, member_map, now_utc):
         }}
         .container {{ max-width: 960px; margin: 36px auto; padding: 0 20px; }}
         .section-title {{ font-size: 1.35rem; margin: 0 0 18px; color: var(--primary-dark); }}
+        .steps-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-bottom: 38px;
+        }}
+        .step-card {{
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 14px rgba(16, 42, 28, 0.05);
+            display: flex;
+            flex-direction: column;
+        }}
+        .step-card h3 {{ margin: 0 0 6px; font-size: 1.05rem; color: var(--primary-dark); }}
+        .refresh-note {{ font-size: 0.8rem; color: var(--primary); font-weight: 600; margin: 0 0 10px; }}
+        .step-card ol {{ margin: 0 0 14px; padding-left: 18px; font-size: 0.9rem; color: var(--muted); }}
+        .step-card li {{ margin-bottom: 6px; }}
+        .step-card .btn-outline {{ margin-top: auto; align-self: flex-start; }}
         .grid {{
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -422,9 +446,38 @@ def generate_hiking_feed(all_events, member_map, now_utc):
         </div>
     </header>
     <main class="container">
-        <h2 class="section-title">Upcoming Group Events</h2>
-        <div class="grid">
-            {cards_section}
+        <h2 class="section-title">How to Install</h2>
+        <div class="steps-grid">
+            <div class="step-card">
+                <h3>📅 Google Calendar</h3>
+                <p class="refresh-note">Updates every ~12–24 hrs (or ~1 hr if using the native mirror)</p>
+                <ol>
+                    <li>Click the button below (or open Google Calendar on desktop).</li>
+                    <li>Click <strong>Add</strong> when prompted to subscribe.</li>
+                    <li>Events appear under <strong>Other calendars</strong>.</li>
+                </ol>
+                <a class="btn btn-outline" href="{gcal_url}" target="_blank" rel="noopener">Add to Google Calendar &rarr;</a>
+            </div>
+            <div class="step-card">
+                <h3>🍎 Apple Calendar (iPhone / Mac)</h3>
+                <p class="refresh-note">Updates every hour (configurable in Calendar settings)</p>
+                <ol>
+                    <li>Tap the button below to open Apple Calendar.</li>
+                    <li>Tap <strong>Subscribe</strong> to confirm.</li>
+                    <li>Set <strong>Auto-Refresh</strong> to <em>Every Hour</em> for fastest updates.</li>
+                </ol>
+                <a class="btn btn-outline" href="{webcal_url}">Subscribe in Apple Calendar &rarr;</a>
+            </div>
+            <div class="step-card">
+                <h3>📧 Outlook &amp; Other Apps</h3>
+                <p class="refresh-note">Updates every few hours (feed refreshes hourly from GroupMe)</p>
+                <ol>
+                    <li>Copy the <code>.ics</code> feed URL above.</li>
+                    <li>In Outlook, choose <strong>Add calendar &rarr; Subscribe from web</strong>.</li>
+                    <li>Paste the URL and click <strong>Import</strong>.</li>
+                </ol>
+                <a class="btn btn-outline" href="hiking.ics">Download .ics File &rarr;</a>
+            </div>
         </div>
     </main>
     <footer>
