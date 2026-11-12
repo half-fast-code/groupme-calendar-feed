@@ -2,6 +2,7 @@ import html
 import os
 import sys
 import json
+import urllib.parse
 import urllib.request
 import urllib.error
 from datetime import datetime, timezone
@@ -255,9 +256,9 @@ def generate_hiking_feed(all_events, member_map, now_utc):
         f.write(ics_content)
 
     feed_url = f"{FEED_BASE_URL}/hiking.ics"
-    gcal_cid = GOOGLE_CALENDAR_CID.strip() or feed_url
-    gcal_url = f"https://calendar.google.com/calendar/render?cid={gcal_cid}"
     webcal_url = feed_url.replace("https://", "webcal://")
+    gcal_cid = GOOGLE_CALENDAR_CID.strip() or webcal_url
+    gcal_url = f"https://calendar.google.com/calendar/render?cid={urllib.parse.quote(gcal_cid, safe='')}"
     cards_section = "\n".join(cards_html) if cards_html else '<p class="empty">No upcoming events scheduled right now — check back soon!</p>'
 
     hiking_html = f"""<!DOCTYPE html>
@@ -452,9 +453,8 @@ def generate_hiking_feed(all_events, member_map, now_utc):
                 <h3>📅 Google Calendar</h3>
                 <p class="refresh-note">Updates every ~12–24 hrs (or ~1 hr if using the native mirror)</p>
                 <ol>
-                    <li>Click the button below (or open Google Calendar on desktop).</li>
-                    <li>Click <strong>Add</strong> when prompted to subscribe.</li>
-                    <li>Events appear under <strong>Other calendars</strong>.</li>
+                    <li>Click the button below on desktop and choose <strong>Add</strong>.</li>
+                    <li>Or copy the URL above &rarr; in Google Calendar click <strong>+</strong> next to <strong>Other calendars</strong> &rarr; <strong>From URL</strong> &rarr; paste &amp; click <strong>Add calendar</strong>.</li>
                 </ol>
                 <a class="btn btn-outline" href="{gcal_url}" target="_blank" rel="noopener">Add to Google Calendar &rarr;</a>
             </div>
